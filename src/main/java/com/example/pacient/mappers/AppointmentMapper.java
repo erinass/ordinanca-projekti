@@ -25,6 +25,7 @@ public class AppointmentMapper {
         dto.setAppointmentType(appointment.getAppointmentType());
         dto.setActive(appointment.isActive());
         dto.setAppointmentBookingType(appointment.getAppointmentBookingType());
+        dto.setPacientName(appointment.getPacient().getName());
         return dto;
 
     }

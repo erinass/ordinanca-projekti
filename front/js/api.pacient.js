@@ -1,5 +1,5 @@
 class ApiPacienti{
-    url = 'http://localhost:8080/api/pacient';
+    url = 'http://localhost:9090/api/pacient';
 
     async findAll() {
         const response = await fetch(this.url); 
