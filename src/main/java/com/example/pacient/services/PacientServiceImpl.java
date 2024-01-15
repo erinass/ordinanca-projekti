@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PacientServiceImpl implements PacientService{
@@ -71,12 +72,12 @@ public class PacientServiceImpl implements PacientService{
 
     @Override
     public PacientDto findByPacientName(String pacientName) {
-        PacientDto pacientDto = repository.findByPacientName(pacientName);
-        Pacient pacient = pacientMapper.toEntity(pacientDto);
+        Optional<Pacient> obj = repository.findAll().stream().filter(item -> item.getName().equals(pacientName)).findFirst();
+        PacientDto pacient = pacientMapper.toDto(obj.get());
         if (pacient == null) {
             throw new RuntimeException("Pacient not found");
         }
-        return pacientMapper.toDto(pacient);
+        return pacient;
     }
 
 }
