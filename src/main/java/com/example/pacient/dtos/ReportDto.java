@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class ReportDto {
     private Long id;
     private Pacient pacient;
-    private int pacientId;
+    private String pacientName;
     private String anamnesis;
     private String therapy;
     private String disease;

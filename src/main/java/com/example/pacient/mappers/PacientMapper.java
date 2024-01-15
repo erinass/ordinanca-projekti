@@ -8,7 +8,12 @@ import java.time.LocalDateTime;
 @Component
 public class PacientMapper {
 
+
     public Pacient toEntity(PacientDto pacientDto){
+        if (pacientDto == null) {
+            // Handle the case where pacientDto is null, throw an exception or return null, depending on your logic.
+            throw new IllegalArgumentException("PacientDto cannot be null");
+        }
         Pacient pacient = new Pacient();
         pacient.setName(pacientDto.getName());
         pacient.setEmail(pacientDto.getEmail());

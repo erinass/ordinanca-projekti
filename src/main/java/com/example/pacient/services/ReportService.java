@@ -7,6 +7,7 @@ import com.example.pacient.mappers.ReportMapper;
 import com.example.pacient.models.Pacient;
 import com.example.pacient.models.Reports;
 import com.example.pacient.repositories.ReportRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,16 +46,17 @@ public class ReportService {
     public void deleteReportById(long id) {
         reportRepository.deleteById(id);
     }
+    @Transactional
 
     public void createReport(ReportDto reportDto) {
-        PacientDto pacientDto = pacientService.findById(reportDto.getPacientId());
+        PacientDto pacientDto = pacientService.findByPacientName(reportDto.getPacientName());
         Pacient pacient = pacientMapper.toEntity(pacientDto);
         reportDto.setPacient(pacient);
         reportRepository.save(reportMapper.toEntity(reportDto));
     }
-
+    @Transactional
     public void updateReport(ReportDto newReportDto, long id) {
-        PacientDto pacientDto = pacientService.findById(newReportDto.getPacientId());
+        PacientDto pacientDto = pacientService.findByPacientName(newReportDto.getPacientName());
         Pacient pacient = pacientMapper.toEntity(pacientDto);
         newReportDto.setPacient(pacient);
         var optionalEntity = reportRepository.findById(id);

@@ -4,6 +4,7 @@ import com.example.pacient.dtos.PacientDto;
 import com.example.pacient.dtos.ReportDto;
 import com.example.pacient.mappers.PacientMapper;
 import com.example.pacient.mappers.ReportMapper;
+import com.example.pacient.models.Pacient;
 import com.example.pacient.repositories.PacientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -66,6 +67,16 @@ public class PacientServiceImpl implements PacientService{
         entity.setCity(newPacientDto.getCity());
         entity.setReports(newPacientDto.getReports());
         repository.save(entity);
+    }
+
+    @Override
+    public PacientDto findByPacientName(String pacientName) {
+        PacientDto pacientDto = repository.findByPacientName(pacientName);
+        Pacient pacient = pacientMapper.toEntity(pacientDto);
+        if (pacient == null) {
+            throw new RuntimeException("Pacient not found");
+        }
+        return pacientMapper.toDto(pacient);
     }
 
 }

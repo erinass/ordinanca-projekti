@@ -16,7 +16,7 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "pacient_id")
+    @JoinColumn(name = "pacient_name")
     private Pacient pacient;
     private String appointmentType;
     private  String appointmentBookingType;

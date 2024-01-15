@@ -18,4 +18,8 @@ public interface PacientService {
     void create(PacientDto pacientDto);
 
     void update(PacientDto newPacientDto, long id);
+
+    PacientDto findByPacientName(String pacientName);
+
+
 }

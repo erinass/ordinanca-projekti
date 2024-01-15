@@ -51,6 +51,10 @@ public class PacientController {
     public void update(@RequestBody PacientDto newPacientDto, @PathVariable long id){
         service.update(newPacientDto,id);
     }
+    @GetMapping("/name/{name}")
+    public PacientDto findByPacientName(String pacientName){
+        return   service.findByPacientName(pacientName);
 
+    }
 
 }

@@ -42,15 +42,16 @@ public class AppointmentService {
         appointmentRepository.deleteById(id);
     }
 
-   public void createAppointment(AppointmentDto appointmentDto) {
-       PacientDto pacientDto = pacientService.findById(appointmentDto.getPacientId());
-       Pacient pacient = pacientMapper.toEntity(pacientDto);
-       appointmentDto.setPacient(pacient);
+    public void createAppointment(AppointmentDto appointmentDto) {
+        PacientDto pacientDto = pacientService.findByPacientName(appointmentDto.getPacientName());
+        Pacient pacient = pacientMapper.toEntity(pacientDto);
+        appointmentDto.setPacient(pacient);
         appointmentRepository.save(appointmentMapper.toEntity(appointmentDto));
     }
 
-   public void updateAppointment(AppointmentDto newAppointmentDto, long id) {
-       PacientDto pacientDto = pacientService.findById(newAppointmentDto.getPacientId());
+
+    public void updateAppointment(AppointmentDto newAppointmentDto, long id) {
+       PacientDto pacientDto = pacientService.findByPacientName(newAppointmentDto.getPacientName());
        Pacient pacient = pacientMapper.toEntity(pacientDto);
        newAppointmentDto.setPacient(pacient);
         var optionalEntity = appointmentRepository.findById(id);

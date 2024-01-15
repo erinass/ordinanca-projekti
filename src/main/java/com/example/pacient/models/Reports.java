@@ -19,7 +19,7 @@ public class Reports {
     private Long id;
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "pacient_id")
+    @JoinColumn(name = "pacient_name")
     private Pacient pacient;
     private String anamnesis;
     private String disease;
