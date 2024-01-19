@@ -14,38 +14,28 @@ import java.util.Optional;
 @CrossOrigin(origins = "*")
 public class PacientController {
 
-
     private final PacientService service;
-
     public PacientController(PacientService service) {
         this.service = service;
     }
 
-
     @GetMapping
     public List<PacientDto> findAll(){
-       return service.findAll();
+        return service.findAll();
     }
-
     @GetMapping("/{id}")
     public PacientDto findById(@PathVariable long id){
-
         return service.findById(id);
-
     }
-
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable long id){
         service.deleteById(id);
     }
 
-
-
     @PostMapping
     public void create(@RequestBody PacientDto pacient){
         service.create(pacient);
     }
-
 
     @PutMapping("/{id}")
     public void update(@RequestBody PacientDto newPacientDto, @PathVariable long id){
@@ -53,8 +43,6 @@ public class PacientController {
     }
     @GetMapping("/name/{name}")
     public PacientDto findByPacientName(String pacientName){
-        return   service.findByPacientName(pacientName);
-
+        return service.findByPacientName(pacientName);
     }
-
 }

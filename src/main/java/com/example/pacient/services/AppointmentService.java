@@ -1,11 +1,13 @@
 package com.example.pacient.services;
 
 import com.example.pacient.dtos.AppointmentDto;
+import com.example.pacient.dtos.AppointmentStatusChangeDto;
 import com.example.pacient.dtos.PacientDto;
 import com.example.pacient.mappers.AppointmentMapper;
 import com.example.pacient.mappers.PacientMapper;
 import com.example.pacient.models.Pacient;
 import com.example.pacient.repositories.AppointmentRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +32,7 @@ public class AppointmentService {
         return appointmentRepository.findAll().stream().map(appointmentMapper::toDto).toList();
     }
 
-   public AppointmentDto findAppointmentById(long id) {
+    public AppointmentDto findAppointmentById(long id) {
         var entity = appointmentRepository.findById(id);
         if (entity.isEmpty())
             throw new RuntimeException("Report case not found");
@@ -38,22 +40,21 @@ public class AppointmentService {
         return dto;
     }
 
-   public void deleteAppointmentById(long id) {
+    public void deleteAppointmentById(long id) {
         appointmentRepository.deleteById(id);
     }
 
     public void createAppointment(AppointmentDto appointmentDto) {
-        PacientDto pacientDto = pacientService.findByPacientName(appointmentDto.getPacientName());
+        PacientDto pacientDto = pacientService.findById(appointmentDto.getPacientId());
         Pacient pacient = pacientMapper.toEntity(pacientDto);
         appointmentDto.setPacient(pacient);
         appointmentRepository.save(appointmentMapper.toEntity(appointmentDto));
     }
 
-
     public void updateAppointment(AppointmentDto newAppointmentDto, long id) {
-       PacientDto pacientDto = pacientService.findByPacientName(newAppointmentDto.getPacientName());
-       Pacient pacient = pacientMapper.toEntity(pacientDto);
-       newAppointmentDto.setPacient(pacient);
+        PacientDto pacientDto = pacientService.findById(newAppointmentDto.getPacientId());
+        Pacient pacient = pacientMapper.toEntity(pacientDto);
+        newAppointmentDto.setPacient(pacient);
         var optionalEntity = appointmentRepository.findById(id);
         if (optionalEntity.isEmpty())
             throw new RuntimeException("Order not found");
@@ -66,4 +67,28 @@ public class AppointmentService {
 
         appointmentRepository.save(entity);
     }
+
+    public void changeStatus(long id, AppointmentStatusChangeDto appointmentStatusChangeDto) {
+        var optionalEntity = appointmentRepository.findById(id);
+        if (optionalEntity.isEmpty())
+            throw new EntityNotFoundException("Entity not found with id: " + id);
+        var entity = optionalEntity.get();
+        entity.setActive(appointmentStatusChangeDto.isActive());
+        appointmentRepository.save(entity);
+    }
+
+
+//    public boolean changeStatusToTrue(long id) {
+//        Optional<Appointment> optionalEntity = appointmentRepository.findById(id);
+//        if (optionalEntity.isPresent()) {
+//            Appointment appointment = optionalEntity.get();
+//            appointment.setStatus(true);
+//            appointmentRepository.save(appointment);
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
+
+
 }

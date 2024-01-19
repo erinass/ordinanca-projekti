@@ -14,8 +14,8 @@ import java.time.LocalDateTime;
 public class AppointmentDto {
     private Long id;
     private Pacient pacient;
-    private String pacientName;
+    private long pacientId;
     private String appointmentType;
-    private  String appointmentBookingType;
+    private String appointmentBookingType;
     private boolean isActive;
 }

@@ -2,7 +2,6 @@ package com.example.pacient.models;
 
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,19 +16,17 @@ import java.util.List;
 @Data
 @Entity
 public class Pacient {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-        private long id;
-        private String name;
-        private int age;
-        @Column(nullable = true)
-        private String city;
-        private String email;
-        private LocalDateTime createdAt = LocalDateTime.now();
-    @JsonManagedReference
+    private long id;
+    private String name;
+    private int age;
+    @Column(nullable = true)
+    private String city;
+    private String email;
+    private LocalDateTime createdAt = LocalDateTime.now();
     @OneToMany(mappedBy = "pacient", cascade = CascadeType.ALL)
-        private List<Reports> reports = new ArrayList<>();
-
+    @JsonManagedReference
+    private List<Reports> reports = new ArrayList<>();
 
 }

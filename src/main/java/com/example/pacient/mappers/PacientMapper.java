@@ -8,10 +8,9 @@ import java.time.LocalDateTime;
 @Component
 public class PacientMapper {
 
-
-    public Pacient toEntity(PacientDto pacientDto){
+    public Pacient toEntity(PacientDto pacientDto) {
         if (pacientDto == null) {
-            // Handle the case where pacientDto is null, throw an exception or return null, depending on your logic.
+// Handle the case where pacientDto is null, throw an exception or return null, depending on your logic.
             throw new IllegalArgumentException("PacientDto cannot be null");
         }
         Pacient pacient = new Pacient();
@@ -21,11 +20,10 @@ public class PacientMapper {
         pacient.setAge(pacientDto.getAge());
         pacient.setId(pacientDto.getId());
         pacient.setReports(pacientDto.getReports());
-
         return pacient;
     }
 
-    public PacientDto toDto(Pacient pacient){
+    public PacientDto toDto(Pacient pacient) {
         PacientDto pacientDto = new PacientDto();
         pacientDto.setName(pacient.getName());
         pacientDto.setEmail(pacient.getEmail());
@@ -34,9 +32,5 @@ public class PacientMapper {
         pacientDto.setAge(pacient.getAge());
         pacientDto.setReports(pacient.getReports());
         return pacientDto;
-
     }
-
-
-
 }

@@ -13,4 +13,6 @@ import java.util.Optional;
 public interface  PacientRepository extends JpaRepository<Pacient, Long> {
 
     Optional<Pacient> findPacientByName(String name);
+
+
 }

@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -17,10 +16,9 @@ public class Reports {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "pacient_name")
-
+    @JsonBackReference
     private Pacient pacient;
     private String anamnesis;
     private String disease;

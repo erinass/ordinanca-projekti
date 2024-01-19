@@ -49,14 +49,14 @@ public class ReportService {
     @Transactional
 
     public void createReport(ReportDto reportDto) {
-        PacientDto pacientDto = pacientService.findByPacientName(reportDto.getPacientName());
+        PacientDto pacientDto = pacientService.findById(reportDto.getPacientId());
         Pacient pacient = pacientMapper.toEntity(pacientDto);
         reportDto.setPacient(pacient);
         reportRepository.save(reportMapper.toEntity(reportDto));
     }
     @Transactional
     public void updateReport(ReportDto newReportDto, long id) {
-        PacientDto pacientDto = pacientService.findByPacientName(newReportDto.getPacientName());
+        PacientDto pacientDto = pacientService.findById(newReportDto.getPacientId());
         Pacient pacient = pacientMapper.toEntity(pacientDto);
         newReportDto.setPacient(pacient);
         var optionalEntity = reportRepository.findById(id);

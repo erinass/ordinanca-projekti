@@ -23,6 +23,7 @@ public class ReportMapper {
         ReportDto reportDto = new ReportDto();
         reportDto.setId(reports.getId());
         reportDto.setPacient(reports.getPacient());
+        reportDto.setPacientId(reports.getPacient().getId());
         reportDto.setDescription(reports.getDescription());
         reportDto.setTherapy(reports.getTherapy());
         reportDto.setDisease(reports.getDisease());

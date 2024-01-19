@@ -1,6 +1,7 @@
 package com.example.pacient.controllers;
 
 import com.example.pacient.dtos.AppointmentDto;
+import com.example.pacient.dtos.AppointmentStatusChangeDto;
 import com.example.pacient.dtos.PacientDto;
 import com.example.pacient.models.Appointment;
 import com.example.pacient.models.Pacient;
@@ -51,6 +52,10 @@ public class AppointmentController {
     @PutMapping("/{id}")
     public void update(@RequestBody AppointmentDto newAppointmentDto, @PathVariable long id){
         service.updateAppointment(newAppointmentDto,id);
+    }
+    @PatchMapping("/{id}")
+    public void changeReportStatus(@PathVariable long id, @RequestBody AppointmentStatusChangeDto updatedAppointment) {
+        service.changeStatus(id, updatedAppointment);
     }
 
 }

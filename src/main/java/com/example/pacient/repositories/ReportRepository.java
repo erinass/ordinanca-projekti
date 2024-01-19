@@ -10,6 +10,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReportRepository extends JpaRepository<Reports, Long> {
-    @Query("SELECT r FROM Reports r WHERE r.pacient.name = :pacientName")
-    PacientDto findByPacientName(@Param("pacientName") String pacientName);
+
 }

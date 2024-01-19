@@ -9,6 +9,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
-    @Query("SELECT a FROM Appointment a WHERE a.pacient.name = :pacientName")
-    PacientDto findByPacientName(@Param("pacientName") String pacientName);
 }

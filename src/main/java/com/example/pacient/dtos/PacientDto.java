@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,6 +19,5 @@ public class PacientDto {
     private String city;
     private String email;
     private List<Reports> reports = new ArrayList<>();
-
 
 }
